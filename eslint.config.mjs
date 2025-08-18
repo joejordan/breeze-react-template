@@ -1,31 +1,34 @@
 import antfu from '@antfu/eslint-config';
-import { FlatCompat } from '@eslint/eslintrc';
-
-// workaround for flat config not being supported yet by eslint-plugin-tailwindcss
-// https://github.com/francoismassart/eslint-plugin-tailwindcss/issues/280
-// how-to from: https://github.com/antfu/eslint-config/issues/431#issuecomment-2014668812
-const customTailwindConfig = new FlatCompat().config({
-  extends: ['plugin:tailwindcss/recommended'],
-  rules: {
-    'tailwindcss/no-custom-classname': 'warn',
-  },
-});
-
-// Add the name property to the config so it displays correctly in the eslint config-inspector (https://github.com/eslint/config-inspector)
-// To run the inspector, use `pnpx @eslint/config-inspector` in the root of the project.
-customTailwindConfig[0].name = 'tailwindcss/recommended';
+import wrap from '@seahax/eslint-plugin-wrap';
+import pluginImport from 'eslint-plugin-import';
 
 export default antfu({
+  react: true,
   stylistic: {
     indent: 2,
     quotes: 'single',
     semi: true,
     trailingComma: 'all',
     arrowParens: 'always',
+    overrides: {
+      'style/max-len': [
+        'warn',
+        {
+          code: 100,
+          ignoreUrls: true,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+          ignoreComments: true,
+        },
+      ],
+    },
     // more specific stylistic customizations are added in the global rules section below
   },
   unicorn: {
     allRecommended: true,
+  },
+  plugins: {
+    'plugin-import': pluginImport,
   },
   rules: {
     /**
@@ -34,11 +37,14 @@ export default antfu({
     'style/arrow-parens': ['error', 'always'],
     'style/brace-style': ['error', '1tbs', { allowSingleLine: true }],
     'style/quote-props': 'off',
+    'perfectionist/sort-imports': 'off',
+    'perfectionist/sort-named-imports': 'off',
     /**
      * unicorn rule customizations
      */
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/consistent-function-scoping': 'off',
+    'unicorn/no-null': 'off',
     // ignore react hook-based filenames, LICENSE, and README
     'unicorn/filename-case': [
       'error',
@@ -55,13 +61,17 @@ export default antfu({
       },
     ],
     /**
+     * React rule customizations
+     */
+    'react/no-leaked-conditional-rendering': 'off',
+    /**
      * jsonc rule customizations
      */
     'jsonc/sort-keys': 'off',
     /**
      * import rule customizations
      */
-    'import/order': [
+    'plugin-import/order': [
       'warn',
       {
         'groups': [
@@ -127,6 +137,14 @@ export default antfu({
      */
     'no-console': 'off',
     'no-unused-vars': 'off',
+    /**
+     * Antfu rule customizations
+     */
+    'antfu/no-top-level-await': 'off',
+    /**
+     * other rule customizations
+     */
+    'react-refresh/only-export-components': 'off',
   },
 
   /**
@@ -135,6 +153,7 @@ export default antfu({
    * Reason unknown, but discussed here: https://github.com/antfu/eslint-config/issues/570
    */
   typescript: {
+    tsconfigPath: 'tsconfig.eslint.json',
     overrides: {
       'ts/consistent-type-definitions': 'off',
       'ts/no-misused-promises': 'off',
@@ -142,6 +161,12 @@ export default antfu({
     // discussion that necessitated this workaround:
     // https://github.com/antfu/eslint-config/issues/570#issuecomment-2349192906
     overridesTypeAware: {
+      'ts/no-unsafe-argument': 'off',
+      'ts/no-unsafe-assignment': 'off',
+      'ts/no-unsafe-call': 'off',
+      'ts/no-unsafe-member-access': 'off',
+      'ts/no-unsafe-return': 'off',
+      'ts/strict-boolean-expressions': 'off',
       'ts/no-misused-promises': [
         'error',
         {
@@ -150,7 +175,32 @@ export default antfu({
       ],
     },
   },
+
+  /**
+   * eslint ignore settings
+   */
+  ignores: [
+    // enable if you want to ignore the default shadcn component directory
+    // '**/components/ui/**',
+  ],
   parserOptions: {
     project: './tsconfig.eslint.json',
   },
-}, ...customTailwindConfig);
+},
+/**
+ * Wrap plugin configuration
+ */
+wrap.config({
+  maxLen: 100, // keep in sync with @stylistic/max-len
+  tabWidth: 2, // matches your TS default
+  autoFix: true, // let `eslint --fix` rewrite long lines
+}),
+/**
+ * File-specific rule overrides for markdown and YAML files
+ */
+{
+  files: ['**/*.md', '**/*.yml', '**/*.yaml'],
+  rules: {
+    'style/max-len': 'off',
+  },
+});
