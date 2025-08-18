@@ -1,4 +1,4 @@
-function Link(props: JSX.IntrinsicElements['a']) {
+function Link(props: React.ComponentProps<'a'>) {
   return (
     <a
       className="text-yellow-500 underline hover:no-underline dark:text-yellow-400"
