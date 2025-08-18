@@ -4,10 +4,10 @@ A simple and fast frontend starter template with delicious defaults.
 
 ## Tech Included
 
-- [Vite](https://vitejs.dev/) - Lightning fast build tool for modern web dev.
-- [React](https://reactjs.org/) - Everybody's favorite frontend library.
+- [Vite (v7)](https://vitejs.dev/) - Lightning fast build tool for modern web dev.
+- [React (v19)](https://reactjs.org/) - Everybody's favorite frontend library.
+- [Tailwind (v4)](https://tailwindcss.com/) - Everybody's favorite CSS framework.
 - [TypeScript](https://www.typescriptlang.org) - Ready to go with TypeScript out of the box.
-- [Tailwind](https://tailwindcss.com/) - Everybody's favorite CSS framework.
 - [ESLint](https://https://eslint.org/) - Modern flat config and best practices to make you better.
 - [pnpm](https://pnpm.io/) - npm _but better._
 
