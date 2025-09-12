@@ -46,6 +46,7 @@
     "build": "vite build",
     "dev:update-deps": "rm -rf pnpm-lock.yaml node_modules/ **/node_modules && pnpm install",
     "start": "vite dev",
+    "dev": "vite dev",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "npm-run-all --parallel tsc:check vitest:run lint lint:fix",
