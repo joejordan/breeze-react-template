@@ -1,4 +1,4 @@
-# Vite React Frontend Starter Template
+# Breeze React Starter Template
 
 A simple and fast frontend starter template with delicious defaults.
 

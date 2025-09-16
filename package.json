@@ -1,19 +1,19 @@
 {
-  "name": "@joejordan/vite-frontend-template",
-  "description": "Vite frontend starter template with delicious defaults",
-  "version": "0.7.1",
+  "name": "@joejordan/breeze-react-template",
+  "description": "Easy Breezy React starter template with delicious defaults",
+  "version": "0.8.0",
   "author": {
     "name": "Joe Jordan",
     "url": "https://github.com/joejordan"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/joejordan/vite-frontend-template.git"
+    "url": "git://github.com/joejordan/breeze-react-template.git"
   },
   "type": "module",
   "engines": {
-    "node": ">=18.11.0",
-    "pnpm": ">=7.1.0"
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
