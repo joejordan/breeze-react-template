@@ -1,0 +1,78 @@
+import { createRootRoute, createRoute, createRouter, Outlet } from '@tanstack/react-router';
+import AppLayout from '@/layouts/app';
+import PublicLayout from '@/layouts/public';
+import AboutPage from '@/pages/about';
+import DashboardPage from '@/pages/app/dashboard';
+import HomePage from '@/pages/home';
+import PrivacyPolicyPage from '@/pages/privacy-policy';
+import TermsOfServicePage from '@/pages/terms-of-service';
+
+// Root route
+const rootRoute = createRootRoute({
+  component: () => <Outlet />,
+});
+
+// Public layout route
+const publicLayoutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  id: 'public',
+  component: PublicLayout,
+});
+
+// Home route
+const indexRoute = createRoute({
+  getParentRoute: () => publicLayoutRoute,
+  path: '/',
+  component: HomePage,
+});
+
+// About route
+const aboutRoute = createRoute({
+  getParentRoute: () => publicLayoutRoute,
+  path: '/about',
+  component: AboutPage,
+});
+
+// Terms of Service route
+const termsOfServiceRoute = createRoute({
+  getParentRoute: () => publicLayoutRoute,
+  path: '/terms-of-service',
+  component: TermsOfServicePage,
+});
+
+// Privacy Policy route
+const privacyPolicyRoute = createRoute({
+  getParentRoute: () => publicLayoutRoute,
+  path: '/privacy-policy',
+  component: PrivacyPolicyPage,
+});
+
+// App layout route
+const appLayoutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  id: 'app',
+  component: AppLayout,
+});
+
+// Dashboard route
+const dashboardRoute = createRoute({
+  getParentRoute: () => appLayoutRoute,
+  path: '/dashboard',
+  component: DashboardPage,
+});
+
+// Route tree
+const routeTree = rootRoute.addChildren([
+  publicLayoutRoute.addChildren([indexRoute, aboutRoute, termsOfServiceRoute, privacyPolicyRoute]),
+  appLayoutRoute.addChildren([dashboardRoute]),
+]);
+
+// Create and export router
+export const router = createRouter({ routeTree });
+
+// Register router for typesafety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router;
+  }
+}
