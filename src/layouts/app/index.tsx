@@ -4,7 +4,7 @@ import AppHeader from './app-header';
 
 function AppLayout() {
   return (
-    <div className="relative flex min-h-svh flex-col">
+    <div className="relative flex min-h-svh flex-col bg-background text-foreground">
       {/* App header */}
       <AppHeader />
 
