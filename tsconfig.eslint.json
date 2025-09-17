@@ -10,5 +10,11 @@
     "**/*.js",
     "**/*.cjs",
     "**/*.mjs"
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }
