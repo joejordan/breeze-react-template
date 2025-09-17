@@ -16,7 +16,7 @@ function AppHeader() {
               to="/"
               className="text-gray-900 hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
               activeProps={{
-                className: "text-blue-600 dark:text-blue-400"
+                className: 'text-blue-600 dark:text-blue-400',
               }}
             >
               Home
@@ -25,7 +25,7 @@ function AppHeader() {
               to="/about"
               className="text-gray-900 hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
               activeProps={{
-                className: "text-blue-600 dark:text-blue-400"
+                className: 'text-blue-600 dark:text-blue-400',
               }}
             >
               About
@@ -34,7 +34,7 @@ function AppHeader() {
               to="/dashboard"
               className="text-gray-900 hover:text-blue-600 dark:text-white dark:hover:text-blue-400"
               activeProps={{
-                className: "text-blue-600 dark:text-blue-400"
+                className: 'text-blue-600 dark:text-blue-400',
               }}
             >
               Dashboard

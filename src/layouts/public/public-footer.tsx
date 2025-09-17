@@ -29,7 +29,11 @@ function PublicFooter() {
 
           {/* Copyright */}
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            © {currentYear} Breeze React Template. All rights reserved.
+            ©
+            {' '}
+            {currentYear}
+            {' '}
+            Breeze React Template. All rights reserved.
           </div>
         </div>
       </div>

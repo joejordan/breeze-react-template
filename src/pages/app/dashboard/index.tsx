@@ -5,7 +5,7 @@ function DashboardPage() {
         <h1 className="mb-6 text-3xl font-bold text-gray-900 dark:text-white">
           Dashboard
         </h1>
-        
+
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-lg bg-white p-6 shadow-md dark:bg-neutral-800">
             <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
@@ -15,7 +15,7 @@ function DashboardPage() {
               This page uses the AppLayout with the menu-style header.
             </p>
           </div>
-          
+
           <div className="rounded-lg bg-white p-6 shadow-md dark:bg-neutral-800">
             <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
               Navigation
@@ -24,7 +24,7 @@ function DashboardPage() {
               Use the header menu to navigate between routes.
             </p>
           </div>
-          
+
           <div className="rounded-lg bg-white p-6 shadow-md dark:bg-neutral-800">
             <h2 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
               Responsive Design

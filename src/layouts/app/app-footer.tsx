@@ -9,20 +9,20 @@ function AppFooter() {
             </p>
           </div>
           <div className="flex items-center space-x-4">
-            <a 
-              href="/privacy-policy" 
+            <a
+              href="/privacy-policy"
               className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             >
               Privacy
             </a>
-            <a 
-              href="/terms-of-service" 
+            <a
+              href="/terms-of-service"
               className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             >
               Terms
             </a>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
             >
               Support

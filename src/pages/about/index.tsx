@@ -11,8 +11,8 @@ function AboutPage() {
         Built with modern tools and best practices for a great developer experience.
       </p>
       <div className="mt-6 flex justify-center gap-4">
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600 dark:bg-gray-600 dark:hover:bg-gray-700"
         >
           Back Home
