@@ -52,6 +52,7 @@
     "test": "npm-run-all --parallel tsc:check vitest:run lint lint:fix",
     "tsc:check": "tsc",
     "vitest:run": "vitest run",
+    "generate:vite-env": "pnpx tsx scripts/generate-vite-env.ts",
     "bump:patch": "pnpm version patch -m \"chore(release): bump version to %s\"",
     "bump:minor": "pnpm version minor -m \"chore(release): bump version to %s\"",
     "bump:major": "pnpm version major -m \"chore(release): bump version to %s\"",
