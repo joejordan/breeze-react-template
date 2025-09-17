@@ -181,7 +181,7 @@ export default antfu({
    */
   ignores: [
     // enable if you want to ignore the default shadcn component directory
-    // '**/components/ui/**',
+    '**/components/ui/**',
   ],
   parserOptions: {
     project: './tsconfig.eslint.json',
