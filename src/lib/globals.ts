@@ -1,0 +1,5 @@
+export const {
+  VITE_BASE_URL: BASE_URL,
+  VITE_API_BASE_URL: API_BASE_URL,
+  VITE_EXAMPLE_ENV_VAR: EXAMPLE_ENV_VAR,
+} = import.meta.env;
