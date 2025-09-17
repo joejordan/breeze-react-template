@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 function AppHeader() {
   return (
@@ -38,6 +39,7 @@ function AppHeader() {
             >
               Dashboard
             </Link>
+            <ThemeToggle />
           </nav>
         </div>
       </div>
