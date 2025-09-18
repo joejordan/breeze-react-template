@@ -57,6 +57,7 @@ export default antfu({
           'LICENSE',
           'README',
           'CHANGELOG',
+          'AGENTS'
         ],
       },
     ],
