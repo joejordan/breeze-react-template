@@ -30,18 +30,23 @@ function getStoredToken(): string | undefined {
   // Try common token storage keys in order of preference
   const tokenKeys = ['authToken', 'access_token', 'token'];
 
-  // First check localStorage
-  for (const key of tokenKeys) {
-    const token = localStorage.getItem(key);
-    if (token)
-      return token;
-  }
+  try {
+    // First check localStorage
+    for (const key of tokenKeys) {
+      const token = localStorage.getItem(key);
+      if (token)
+        return token;
+    }
 
-  // Then check sessionStorage
-  for (const key of tokenKeys) {
-    const token = sessionStorage.getItem(key);
-    if (token)
-      return token;
+    // Then check sessionStorage
+    for (const key of tokenKeys) {
+      const token = sessionStorage.getItem(key);
+      if (token)
+        return token;
+    }
+  } catch (error) {
+    // Handle cases where storage APIs are unavailable or restricted
+    console.warn('Storage access failed, proceeding without stored token:', error);
   }
 
   return undefined;
@@ -54,7 +59,9 @@ function getStoredToken(): string | undefined {
  * - Automatically loads bearer tokens from localStorage/sessionStorage
  * - Pre-configured with API base URL from environment variables
  * - Request/response interceptors for consistent authentication handling
- * - Customizable timeout, headers, and other axios options
+ * - Default array parameter serialization for better API compatibility
+ * - Enhanced error handling with graceful storage access fallbacks
+ * - Supports all standard axios configuration options
  *
  * Token Loading Priority:
  * 1. Provided `options.token` parameter
@@ -62,7 +69,7 @@ function getStoredToken(): string | undefined {
  * 3. localStorage.getItem('access_token')
  * 4. sessionStorage.getItem('authToken')
  *
- * @param options - Configuration options for the axios instance
+ * @param options - Configuration options for the axios instance (extends AxiosRequestConfig)
  * @returns Configured AxiosInstance ready for API calls
  *
  * @example
@@ -79,6 +86,20 @@ function getStoredToken(): string | undefined {
  *   timeout: 15000,
  *   headers: { 'X-Custom-Header': 'value' }
  * });
+ *
+ * // Arrays will serialize as: ?tags=tag1&tags=tag2 (not tags[0]=tag1&tags[1]=tag2)
+ * const response = await axios.get('/posts', { params: { tags: ['react', 'typescript'] } });
+ *
+ * // Error handling with isAxiosError utility
+ * import { useAxios, isAxiosError } from '@/hooks/use-axios';
+ *
+ * try {
+ *   const data = await axios.get('/api/data');
+ * } catch (error) {
+ *   if (isAxiosError(error)) {
+ *     console.log('Axios error:', error.response?.status);
+ *   }
+ * }
  * ```
  */
 export function useAxios(options: UseAxiosOptions = {}): AxiosInstance {
@@ -95,6 +116,13 @@ export function useAxios(options: UseAxiosOptions = {}): AxiosInstance {
         'Content-Type': 'application/json',
         ...options.headers,
       },
+      // Configure array parameter serialization for better API compatibility
+      paramsSerializer: {
+        indexes: null, // Serialize arrays as repeated keys without indices
+        ...options.paramsSerializer,
+      },
+      // Spread any other options to allow full customization
+      ...options,
     });
 
     // Request interceptor to attach bearer token
@@ -141,13 +169,10 @@ export function useAxios(options: UseAxiosOptions = {}): AxiosInstance {
     );
 
     return instance;
-  }, [
-    options.token,
-    options.baseURL,
-    options.timeout,
-    options.withCredentials,
-    options.headers,
-  ]);
+  }, [options]);
 
   return axiosInstance;
 }
+
+// Export utility for convenient error checking
+export { isAxiosError } from 'axios';
