@@ -1,4 +1,5 @@
 import { createRootRoute, createRoute, createRouter, Outlet } from '@tanstack/react-router';
+import ProtectedRoute from '@/auth/protected-route';
 import AppLayout from '@/layouts/app';
 import PublicLayout from '@/layouts/public';
 import AboutPage from '@/pages/about';
@@ -47,11 +48,15 @@ const privacyPolicyRoute = createRoute({
   component: PrivacyPolicyPage,
 });
 
-// App layout route
+// App layout route - Protected with authentication
 const appLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: 'app',
-  component: AppLayout,
+  component: () => (
+    <ProtectedRoute>
+      <AppLayout />
+    </ProtectedRoute>
+  ),
 });
 
 // Dashboard route
