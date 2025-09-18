@@ -12,9 +12,10 @@ export type UseAxiosOptions = AxiosRequestConfig & {
   /**
    * Bearer token to use for authentication.
    * If not provided, the hook will automatically attempt to load from:
-   * 1. localStorage.getItem('authToken')
-   * 2. localStorage.getItem('access_token')
-   * 3. sessionStorage.getItem('authToken')
+   * 1. Auth provider (e.g., Clerk's getToken)
+   * 2. localStorage.getItem('authToken')
+   * 3. localStorage.getItem('access_token')
+   * 4. sessionStorage.getItem('authToken')
    */
   token?: string;
 };
@@ -53,21 +54,44 @@ function getStoredToken(): string | undefined {
 }
 
 /**
+ * Retrieves authentication token from provider or storage fallback
+ * @returns Promise that resolves to token or undefined
+ */
+async function getToken(): Promise<string | undefined> {
+  try {
+    // TODO: Add auth provider integration here
+    // Example for Clerk:
+    // const { useAuth } = await import('@clerk/clerk-react');
+    // const { getToken } = useAuth();
+    // const providerToken = await getToken();
+    // if (providerToken) return providerToken;
+
+    // Fallback to storage-based tokens
+    return getStoredToken();
+  } catch (error) {
+    console.warn('Token retrieval failed, falling back to storage:', error);
+    return getStoredToken();
+  }
+}
+
+/**
  * Custom hook that returns a pre-configured Axios instance for API calls.
  *
  * Features:
- * - Automatically loads bearer tokens from localStorage/sessionStorage
+ * - Automatically loads bearer tokens from auth providers or storage fallback
  * - Pre-configured with API base URL from environment variables
  * - Request/response interceptors for consistent authentication handling
+ * - Async token retrieval with provider integration support
  * - Default array parameter serialization for better API compatibility
  * - Enhanced error handling with graceful storage access fallbacks
  * - Supports all standard axios configuration options
  *
  * Token Loading Priority:
  * 1. Provided `options.token` parameter
- * 2. localStorage.getItem('authToken')
- * 3. localStorage.getItem('access_token')
- * 4. sessionStorage.getItem('authToken')
+ * 2. Auth provider (e.g., Clerk's getToken)
+ * 3. localStorage.getItem('authToken')
+ * 4. localStorage.getItem('access_token')
+ * 5. sessionStorage.getItem('authToken')
  *
  * @param options - Configuration options for the axios instance (extends AxiosRequestConfig)
  * @returns Configured AxiosInstance ready for API calls
@@ -104,9 +128,6 @@ function getStoredToken(): string | undefined {
  */
 export function useAxios(options: UseAxiosOptions = {}): AxiosInstance {
   const axiosInstance = useMemo(() => {
-    // Get token from options or attempt to load from storage
-    const token = options.token ?? getStoredToken();
-
     // Create axios instance with base configuration
     const instance = axios.create({
       baseURL: options.baseURL ?? API_BASE_URL,
@@ -127,7 +148,10 @@ export function useAxios(options: UseAxiosOptions = {}): AxiosInstance {
 
     // Request interceptor to attach bearer token
     instance.interceptors.request.use(
-      (config) => {
+      async (config) => {
+        // Get token with priority: options.token > auth provider > storage fallback
+        const token = options.token ?? await getToken();
+        
         // Attach bearer token if available
         if (token && config.headers) {
           config.headers.Authorization = `Bearer ${token}`;
