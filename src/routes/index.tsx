@@ -5,6 +5,7 @@ import PublicLayout from '@/layouts/public';
 import AboutPage from '@/pages/about';
 import DashboardPage from '@/pages/app/dashboard';
 import HomePage from '@/pages/home';
+import LoginPage from '@/pages/login';
 import PrivacyPolicyPage from '@/pages/privacy-policy';
 import TermsOfServicePage from '@/pages/terms-of-service';
 
@@ -48,6 +49,13 @@ const privacyPolicyRoute = createRoute({
   component: PrivacyPolicyPage,
 });
 
+// Login route
+const loginRoute = createRoute({
+  getParentRoute: () => publicLayoutRoute,
+  path: '/login',
+  component: LoginPage,
+});
+
 // App layout route - Protected with authentication
 const appLayoutRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -68,7 +76,13 @@ const dashboardRoute = createRoute({
 
 // Route tree
 const routeTree = rootRoute.addChildren([
-  publicLayoutRoute.addChildren([indexRoute, aboutRoute, termsOfServiceRoute, privacyPolicyRoute]),
+  publicLayoutRoute.addChildren([
+    indexRoute,
+    aboutRoute,
+    termsOfServiceRoute,
+    privacyPolicyRoute,
+    loginRoute,
+  ]),
   appLayoutRoute.addChildren([dashboardRoute]),
 ]);
 

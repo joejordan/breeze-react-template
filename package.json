@@ -16,6 +16,7 @@
     "pnpm": ">=9.0.0"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@tanstack/react-router": "^1.131.44",
     "axios": "^1.12.2",
