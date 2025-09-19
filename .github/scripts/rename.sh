@@ -18,6 +18,7 @@ jq --arg NAME "@$GITHUB_REPOSITORY" \
    --arg URL "https://github.com/$GITHUB_REPOSITORY" \
    --arg DESCRIPTION "$GITHUB_REPOSITORY_DESCRIPTION" \
    '.name = $NAME |
+    .version = "0.1.0" |
     .description = $DESCRIPTION |
     .author.name = $AUTHOR |
     .author.url = $URL |
