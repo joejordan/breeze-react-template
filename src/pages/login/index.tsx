@@ -43,25 +43,25 @@ function LoginPage() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <div
         className={`w-full max-w-sm transform transition-all duration-700 ease-out ${isVisible
-            ? 'opacity-100 translate-y-0 scale-100'
-            : 'opacity-0 translate-y-8 scale-95'
-          }`}
+          ? 'opacity-100 translate-y-0 scale-100'
+          : 'opacity-0 translate-y-8 scale-95'
+        }`}
       >
         {/* Header */}
         <div className="text-center mb-8">
           <h1
             className={`text-2xl font-semibold text-foreground transform transition-all duration-500 ease-out delay-200 ${isVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-4'
-              }`}
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-4'
+            }`}
           >
             Welcome back
           </h1>
           <p
             className={`mt-2 text-sm text-muted-foreground transform transition-all duration-500 ease-out delay-[400ms] ${isVisible
-                ? 'opacity-100 translate-y-0'
-                : 'opacity-0 translate-y-4'
-              }`}
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 translate-y-4'
+            }`}
           >
             Sign in to your account
           </p>
@@ -70,9 +70,9 @@ function LoginPage() {
         {/* Card */}
         <div
           className={`bg-card border border-border rounded-lg p-8 shadow-sm transform transition-all duration-500 ease-out delay-[600ms] ${isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
-            }`}
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-4'
+          }`}
         >
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-4">
@@ -129,9 +129,9 @@ function LoginPage() {
         {/* Footer */}
         <div
           className={`mt-8 text-center transform transition-all duration-500 ease-out delay-[800ms] ${isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
-            }`}
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-4'
+          }`}
         >
           <p className="text-sm text-muted-foreground">
             Don't have an account?
@@ -148,9 +148,9 @@ function LoginPage() {
         {/* Back link */}
         <div
           className={`mt-6 text-center transform transition-all duration-500 ease-out delay-[1000ms] ${isVisible
-              ? 'opacity-100 translate-y-0'
-              : 'opacity-0 translate-y-4'
-            }`}
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-4'
+          }`}
         >
           <Link
             to="/"

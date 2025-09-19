@@ -2,9 +2,9 @@
  * Standard API response wrapper
  * Works great with useAxios hook and Tanstack Query
  */
-export type ApiResponse<TData = unknown, TError = unknown> =
-  | ApiSuccessResponse<TData>
-  | ApiErrorResponse<TError>;
+export type ApiResponse<TData = unknown, TError = unknown>
+  = | ApiSuccessResponse<TData>
+    | ApiErrorResponse<TError>;
 
 export type ApiSuccessResponse<TData> = {
   readonly success: true;

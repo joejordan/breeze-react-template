@@ -28,7 +28,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
             Something went wrong
           </h1>
           <p className="text-muted-foreground">
-            We encountered an error while loading this page. 
+            We encountered an error while loading this page.
             Please try again or return to the home page.
           </p>
         </div>

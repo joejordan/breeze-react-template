@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-param-names */
 import { useEffect } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { CircularProgress } from '@/components/ui/circular-progress';

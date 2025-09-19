@@ -10,12 +10,12 @@ type NasaApodResponse = {
   service_version: string;
   title: string;
   url: string;
-}
+};
 
 // Custom hook for NASA Astronomy Picture of the Day
 export function useNasaApod(enabled = false) {
   const axios = useAxios({ baseURL: 'https://api.nasa.gov' });
-  
+
   return useQuery<NasaApodResponse>({
     queryKey: ['nasa-apod'],
     queryFn: async (): Promise<NasaApodResponse> => {
@@ -25,6 +25,6 @@ export function useNasaApod(enabled = false) {
     enabled, // Only run when explicitly enabled
     staleTime: 1000 * 60 * 30, // 30 minutes - NASA APOD updates daily
     retry: 1,
-    retryDelay: attemptIndex => Math.min(1000 * (2 ** attemptIndex), 30_000),
+    retryDelay: (attemptIndex) => Math.min(1000 * (2 ** attemptIndex), 30_000),
   });
 }

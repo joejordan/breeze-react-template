@@ -151,7 +151,7 @@ export function useAxios(options: UseAxiosOptions = {}): AxiosInstance {
       async (config) => {
         // Get token with priority: options.token > auth provider > storage fallback
         const token = options.token ?? await getToken();
-        
+
         // Attach bearer token if available
         if (token && config.headers) {
           config.headers.Authorization = `Bearer ${token}`;
