@@ -1,11 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Link, useRouter } from '@tanstack/react-router';
+import { CircularProgress } from '@/components/ui/circular-progress';
+import { useNasaApod } from '@/hooks/use-nasa-apod';
 
 function HomePage() {
   const [isVisible, setIsVisible] = useState(false);
   const [shouldThrowError, setShouldThrowError] = useState(false);
   const [shouldThrowNetworkError, setShouldThrowNetworkError] = useState(false);
+  const [shouldFetchApod, setShouldFetchApod] = useState(false);
   const router = useRouter();
+
+  // TanStack Query demo
+  const { data: apodData, isLoading, error, refetch } = useNasaApod(shouldFetchApod);
+
+  const handleFetchApod = () => {
+    if (shouldFetchApod) {
+      void refetch();
+    } else {
+      setShouldFetchApod(true);
+    }
+  };
 
   useEffect(() => {
     // Trigger animations after component mounts
@@ -96,10 +110,112 @@ function HomePage() {
         </Link>
       </div>
 
+      {/* TanStack Query Demo Section */}
+      <div
+        className={`mt-8 rounded border-2 border-dashed border-blue-400 bg-blue-50 p-6 dark:border-blue-500 dark:bg-blue-900/20 transform transition-[transform,opacity,background-color,border-color] duration-300 ease-out ${isVisible
+          ? 'opacity-100 translate-y-0 duration-500'
+          : 'opacity-0 translate-y-4 duration-500'
+          }`}
+      >
+        <h2 className="mb-4 text-2xl font-bold text-blue-800 dark:text-blue-200">
+          🚀 TanStack Query Demo
+        </h2>
+        <p className="mb-4 text-sm text-blue-700 dark:text-blue-300">
+          Fetches NASA's Astronomy Picture of the Day using TanStack Query.
+          Demonstrates loading states, error handling, caching, and refetching.
+        </p>
+
+        <div className="mb-4">
+          <button
+            type="button"
+            onClick={handleFetchApod}
+            disabled={isLoading}
+            className="rounded bg-blue-500 px-6 py-3 text-white transition-all duration-200 hover:bg-blue-600 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-offset-gray-800"
+          >
+            {isLoading
+              ? 'Loading...'
+              : (shouldFetchApod ? '🔄 Refetch NASA APOD' : '🚀 Fetch NASA APOD')}
+          </button>
+        </div>
+
+        {isLoading && (
+          <div className="flex items-center justify-center py-8">
+            <CircularProgress size={32} className="text-blue-500" />
+            <span className="ml-3 text-blue-600 dark:text-blue-400">
+              Fetching astronomy data...
+            </span>
+          </div>
+        )}
+
+        {error && (
+          <div className="rounded border border-red-300 bg-red-50 p-4 text-red-800 dark:border-red-600 dark:bg-red-900/20 dark:text-red-400">
+            <h3 className="font-semibold">❌ Error loading data</h3>
+            <p className="mt-1 text-sm">{error.message}</p>
+            <button
+              type="button"
+              onClick={() => void refetch()}
+              className="mt-2 rounded bg-red-500 px-3 py-1 text-sm text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
+        {apodData && !isLoading && !error && (
+          <div className="rounded border border-blue-200 bg-white p-4 text-left dark:border-blue-700 dark:bg-gray-800">
+            <h3 className="mb-3 text-xl font-bold text-gray-900 dark:text-white">
+              {apodData.title}
+            </h3>
+            <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
+              📅
+              {' '}
+              {apodData.date}
+            </p>
+
+            {apodData.media_type === 'image'
+              ? (
+                <img
+                  src={apodData.url}
+                  alt={apodData.title}
+                  className="mb-4 max-h-64 w-full rounded object-cover"
+                  loading="lazy"
+                />
+              )
+              : (
+                <div className="mb-4 aspect-video rounded bg-gray-100 dark:bg-gray-700">
+                  <iframe
+                    src={apodData.url}
+                    title={apodData.title}
+                    className="h-full w-full rounded border-0"
+                    sandbox="allow-scripts allow-presentation"
+                    allow="encrypted-media"
+                    allowFullScreen
+                  />
+                </div>
+              )}
+
+            <p className="prose text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+              {apodData.explanation}
+            </p>
+
+            {apodData.hdurl && (
+              <a
+                href={apodData.hdurl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-block rounded bg-blue-500 px-3 py-1 text-sm text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                View HD Image →
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Error Boundary Demo Section - Only show in development */}
       {import.meta.env.DEV && (
         <div
-          className={`mt-8 rounded border-2 border-dashed border-yellow-400 bg-yellow-50 p-6 dark:border-yellow-500 dark:bg-yellow-900/20 transform transition-all duration-500 ease-out delay-[1000ms] ${isVisible
+          className={`mt-8 rounded border-2 border-dashed border-yellow-400 bg-yellow-50 p-6 dark:border-yellow-500 dark:bg-yellow-900/20 transform transition-[transform,opacity,background-color,border-color] duration-300 ease-out ${isVisible
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4'
             }`}
