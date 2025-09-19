@@ -4,14 +4,18 @@ import AppLayout from '@/layouts/app';
 import PublicLayout from '@/layouts/public';
 import AboutPage from '@/pages/about';
 import DashboardPage from '@/pages/app/dashboard';
+import ErrorPage from '@/pages/error';
 import HomePage from '@/pages/home';
 import LoginPage from '@/pages/login';
+import NotFoundPage from '@/pages/not-found';
 import PrivacyPolicyPage from '@/pages/privacy-policy';
 import TermsOfServicePage from '@/pages/terms-of-service';
 
 // Root route
 const rootRoute = createRootRoute({
   component: () => <Outlet />,
+  errorComponent: ({ error, reset }) => <ErrorPage error={error} reset={reset} />,
+  notFoundComponent: () => <NotFoundPage />,
 });
 
 // Public layout route
