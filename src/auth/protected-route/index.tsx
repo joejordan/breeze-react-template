@@ -71,7 +71,7 @@ function ProtectedRoute({
   useEffect(() => {
     // Only redirect if we're not loading and user is not authenticated
     if (!isLoading && !isAuthenticated) {
-      void navigate({ to: redirectTo });
+      void navigate({ to: redirectTo, replace: true });
     }
   }, [isAuthenticated, isLoading, navigate, redirectTo]);
 
