@@ -62,13 +62,13 @@ function HomePage() {
       className={`mx-auto my-8 mt-10 w-8/12 rounded border border-gray-200 p-4 text-center shadow-md dark:border-neutral-600 dark:bg-neutral-800 dark:shadow-none transform transition-all duration-700 ease-out ${isVisible
         ? 'opacity-100 translate-y-0 scale-100'
         : 'opacity-0 translate-y-8 scale-95'
-      }`}
+        }`}
     >
       <h1
         className={`mb-4 text-4xl font-bold transform transition-all duration-500 ease-out delay-200 ${isVisible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-4'
-        }`}
+          }`}
       >
         Welcome
       </h1>
@@ -76,7 +76,7 @@ function HomePage() {
         className={`my-4 transform transition-all duration-500 ease-out delay-[400ms] ${isVisible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-4'
-        }`}
+          }`}
       >
         <em className="text-lg">Minimal, fast, sensible defaults.</em>
       </p>
@@ -84,7 +84,7 @@ function HomePage() {
         className={`my-4 text-muted-foreground transform transition-all duration-500 ease-out delay-[600ms] ${isVisible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-4'
-        }`}
+          }`}
       >
         Using Vite, React, TypeScript, Tailwind, and now Tanstack Router.
       </p>
@@ -92,7 +92,7 @@ function HomePage() {
         className={`mt-6 flex justify-center gap-4 transform transition-all duration-500 ease-out delay-[800ms] ${isVisible
           ? 'opacity-100 translate-y-0'
           : 'opacity-0 translate-y-4'
-        }`}
+          }`}
       >
         <Link
           to="/about"
@@ -115,7 +115,7 @@ function HomePage() {
         className={`mt-8 rounded border-2 border-dashed border-blue-400 bg-blue-50 p-6 dark:border-blue-500 dark:bg-blue-900/20 transform transition-[transform,opacity,background-color,border-color] duration-300 ease-out ${isVisible
           ? 'opacity-100 translate-y-0 duration-500'
           : 'opacity-0 translate-y-4 duration-500'
-        }`}
+          }`}
       >
         <h2 className="mb-4 text-2xl font-bold text-blue-800 dark:text-blue-200">
           🚀 TanStack Query Demo
@@ -174,25 +174,25 @@ function HomePage() {
 
             {apodData.media_type === 'image'
               ? (
-                  <img
-                    src={apodData.url}
-                    alt={apodData.title}
-                    className="mb-4 max-h-64 w-full rounded object-cover"
-                    loading="lazy"
-                  />
-                )
+                <img
+                  src={apodData.url}
+                  alt={apodData.title}
+                  className="mb-4 max-h-64 w-full rounded object-cover"
+                  loading="lazy"
+                />
+              )
               : (
-                  <div className="mb-4 aspect-video rounded bg-gray-100 dark:bg-gray-700">
-                    <iframe
-                      src={apodData.url}
-                      title={apodData.title}
-                      className="h-full w-full rounded border-0"
-                      sandbox="allow-scripts allow-presentation"
-                      allow="encrypted-media"
-                      allowFullScreen
-                    />
-                  </div>
-                )}
+                <div className="mb-4 aspect-video rounded bg-gray-100 dark:bg-gray-700">
+                  <iframe
+                    src={apodData.url}
+                    title={apodData.title}
+                    className="h-full w-full rounded border-0"
+                    sandbox="allow-scripts allow-presentation"
+                    allow="encrypted-media"
+                    allowFullScreen
+                  />
+                </div>
+              )}
 
             <p className="prose text-sm leading-relaxed text-gray-700 dark:text-gray-300">
               {apodData.explanation}
@@ -218,7 +218,7 @@ function HomePage() {
           className={`mt-8 rounded border-2 border-dashed border-yellow-400 bg-yellow-50 p-6 dark:border-yellow-500 dark:bg-yellow-900/20 transform transition-[transform,opacity,background-color,border-color] duration-300 ease-out ${isVisible
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4'
-          }`}
+            }`}
         >
           <h2 className="mb-4 text-2xl font-bold text-yellow-800 dark:text-yellow-200">
             ⚠️ Error Boundary Demo
