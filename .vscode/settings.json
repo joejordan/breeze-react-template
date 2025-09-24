@@ -9,6 +9,14 @@
     "source.organizeImports": "never"
   },
 
+  // Explicitly enable flat config support for ESLint extension
+  "eslint.useFlatConfig": true,
+
+  // Use explicit config file path to ensure consistency
+  "eslint.options": {
+    "overrideConfigFile": "eslint.config.mjs"
+  },
+
   // Silent the stylistic rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off", "fixable": true },

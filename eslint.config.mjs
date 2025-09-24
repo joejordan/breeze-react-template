@@ -3,6 +3,7 @@ import wrap from '@seahax/eslint-plugin-wrap';
 import pluginImport from 'eslint-plugin-import';
 
 export default antfu({
+  isInEditor: false,
   react: true,
   stylistic: {
     indent: 2,
@@ -36,6 +37,7 @@ export default antfu({
      */
     'style/arrow-parens': ['error', 'always'],
     'style/brace-style': ['error', '1tbs', { allowSingleLine: true }],
+    'style/indent': ['error', 2],
     'style/quote-props': 'off',
     'perfectionist/sort-imports': 'off',
     'perfectionist/sort-named-imports': 'off',
