@@ -2,6 +2,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import ErrorBoundary from '@/components/error-boundary';
 import HelmetHeader from '@/components/helmet-header';
 import { ThemeProvider } from '@/contexts/theme-context';
@@ -20,6 +21,7 @@ export default function App() {
             <RouterProvider router={router} />
           </HelmetProvider>
           <ReactQueryDevtools initialIsOpen={false} />
+          <TanStackRouterDevtools router={router} initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeProvider>
     </ErrorBoundary>
