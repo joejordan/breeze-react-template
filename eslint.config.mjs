@@ -3,7 +3,7 @@ import wrap from '@seahax/eslint-plugin-wrap';
 import pluginImport from 'eslint-plugin-import';
 
 export default antfu({
-  isInEditor: false,
+  isInEditor: false, // set to false if you don't want stylistic rules applied in your editor
   react: true,
   stylistic: {
     indent: 2,
@@ -140,6 +140,7 @@ export default antfu({
      */
     'no-console': 'off',
     'no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'warn',
     /**
      * Antfu rule customizations
      */
@@ -190,20 +191,20 @@ export default antfu({
     project: './tsconfig.eslint.json',
   },
 },
-/**
- * Wrap plugin configuration
- */
-wrap.config({
-  maxLen: 100, // keep in sync with @stylistic/max-len
-  tabWidth: 2, // matches your TS default
-  autoFix: true, // let `eslint --fix` rewrite long lines
-}),
-/**
- * File-specific rule overrides for markdown and YAML files
- */
-{
-  files: ['**/*.md', '**/*.yml', '**/*.yaml'],
-  rules: {
-    'style/max-len': 'off',
-  },
-});
+  /**
+   * Wrap plugin configuration
+   */
+  wrap.config({
+    maxLen: 100, // keep in sync with @stylistic/max-len
+    tabWidth: 2, // matches your TS default
+    autoFix: true, // let `eslint --fix` rewrite long lines
+  }),
+  /**
+   * File-specific rule overrides for markdown and YAML files
+   */
+  {
+    files: ['**/*.md', '**/*.yml', '**/*.yaml'],
+    rules: {
+      'style/max-len': 'off',
+    },
+  });
