@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    // Essential - Required for proper development experience
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    
+    // Recommended - Improves developer productivity
+    "christian-kohler.path-intellisense",
+    
+    // Optional - Nice to have
+    "eamodio.gitlens",
+    "yoavbls.pretty-ts-errors"
+  ]
+}
